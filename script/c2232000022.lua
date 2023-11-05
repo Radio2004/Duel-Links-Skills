@@ -44,7 +44,7 @@ function s.flipop2(e,tp,eg,ep,ev,re,r,rp)
 		s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 	elseif op==1 then
 		s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
-	else then
+	else
 		s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
