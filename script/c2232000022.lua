@@ -17,6 +17,9 @@ function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 	local b1=Duel.GetFlagEffect(tp,id+1)==0
 		and Duel.IsExistingMatchingCard(s.sendToGrave,tp,LOCATION_HAND,0,1,nil)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
+	local b2=Duel.GetFlagEffect(tp,id+1)==0
+		and Duel.IsExistingMatchingCard(s.sendToGrave,tp,LOCATION_HAND,0,1,nil)
+		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 
 	return aux.CanActivateSkill(tp) and (b1 or b2)
 end
@@ -25,6 +28,10 @@ function s.flipop2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,tp,id)
 	--Boolean check for effect 1:
 	local b1=Duel.GetFlagEffect(tp, id+1)==0
+		and Duel.IsExistingMatchingCard(s.high_level_filter, tp, LOCATION_MZONE, 0, 1, nil)
+		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
+
+	local b2=Duel.GetFlagEffect(tp, id+1)==0
 		and Duel.IsExistingMatchingCard(s.high_level_filter, tp, LOCATION_MZONE, 0, 1, nil)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 
@@ -44,4 +51,10 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 	local cearth=Duel.CreateToken(tp, 9409625)
 	Duel.SSet(tp,cearth)
 	Duel.RegisterFlagEffect(tp,id+1,0,0,0)
+end
+
+function s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
+	local cearth=Duel.CreateToken(tp, 9409625)
+	Duel.SSet(tp,cearth)
+	Duel.RegisterFlagEffect(tp,id+2,0,0,0)
 end
