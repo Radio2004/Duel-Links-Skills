@@ -31,7 +31,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.btop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.RegisterFlagEffect(id+3,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,2)
+	Duel.RegisterFlagEffect(tp,id+3,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,2)
 end
 
 function s.sendToGrave(c)
