@@ -15,15 +15,12 @@ function s.initial_effect(c)
 end
 
 function s.op(e,tp,eg,ep,ev,re,r,rp)
-	if e:GetLabel()==0 then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_LEAVE_FIELD)
 		e1:SetCondition(s.spcon)
 		e1:SetOperation(s.btop)
 		Duel.RegisterEffect(e1,tp)
-	end
-	e:SetLabel(1)
 end
 
 function s.cfilter(c,tp,rp)
@@ -70,7 +67,7 @@ function s.flipop2(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.IsExistingMatchingCard(s.sendToGrave,tp,LOCATION_HAND,0,1,nil)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 
-	local b2=Duel.GetFlagEffect(tp,id+2)==0 and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil)
+	local b2=Duel.GetFlagEffect(tp,id+2)==0 and Duel.GetFlagEffect(tp,id+3)~=0 and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil)
 
 	local op=Duel.SelectEffect(tp, {b1,aux.Stringid(id,0)},
 								   {b2,aux.Stringid(id,1)})
