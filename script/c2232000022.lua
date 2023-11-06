@@ -24,7 +24,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.cfilter(c,tp,rp)
-	return c:IsCode(9409625,36894320,72883039) and c:IsPreviousControler(tp) and rp==1-tp and c:IsReason(REASON_EFFECT)
+	return c:IsCode(9409625) and c:IsPreviousControler(tp)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
@@ -39,14 +39,12 @@ function s.sendToGrave(c)
 end
 
 function s.removedFromField(c,tp)
-	return c:GetReasonPlayer()==1-tp and c:IsCode(9409625,36894320,72883039) and c:IsReason(REASON_EFFECT) and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_ONFIELD)
+   return c:GetReasonPlayer()==1-tp and c:IsCode(9409625,36894320,72883039) and c:IsReason(REASON_EFFECT) and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_ONFIELD)
 end
 
 function s.sephylon(c)
 	return c:IsCode(8967776) and not c:IsPublic()
 end
-
-
 
 function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 	--OPT check
