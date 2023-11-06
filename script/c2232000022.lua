@@ -2,7 +2,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate Skill
-	aux.AddSkillProcedure(c,2,false,nil,nil)
 	local e1=Effect.CreateEffect(c)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
@@ -11,12 +10,13 @@ function s.initial_effect(c)
 	e1:SetRange(0x5f)
 	e1:SetLabel(0)
 	e1:SetOperation(s.op)
-	aux.AddSkillProcedure(c,2,false,s.flipcon2,s.flipop2)
+	aux.AddSkillProcedure(c,1,false,s.flipcon2,s.flipop2)
 end
 
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 		e1:SetCode(EVENT_LEAVE_FIELD)
 		e1:SetCondition(s.spcon)
 		e1:SetOperation(s.btop)
@@ -24,7 +24,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.cfilter(c,tp,rp)
-	return c:IsCode(9409625) and c:IsPreviousControler(tp)
+	return c:IsCode(9409625)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
@@ -99,7 +99,7 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
-	local cearth=Duel.CreateToken(tp, 9409625)
+	local cearth=Duel.CreateToken(tp,9409625)
 	Duel.SSet(tp,cearth)
 	Duel.RegisterFlagEffect(tp,id+2,0,0,0)
 end
