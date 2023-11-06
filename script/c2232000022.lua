@@ -2,7 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate Skill
-	aux.AddSkillProcedure(c,2,false,s.flipcon2,s.flipop2)
+	aux.AddSkillProcedure(c,1,false,s.flipcon2,s.flipop2)
 end
 
 function s.sendToGrave(c)
