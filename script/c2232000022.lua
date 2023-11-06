@@ -24,22 +24,18 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.cfilter(c,tp,rp)
-	return c:IsCode(9409625,36894320,72883039) and c:IsPreviousControler(tp) and rp==1-tp and c:IsReason(REASON_EFFECT)
+	return c:IsCode(9409625) 
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
 end
 
 function s.btop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.RegisterFlagEffect(id+3,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,2)
+	Duel.RegisterFlagEffect(id+3,0,0,0)
 end
 
 function s.sendToGrave(c)
 	return c:IsAbleToGraveAsCost()
-end
-
-function s.removedFromField(c,tp)
-	return c:GetReasonPlayer()==1-tp and c:IsCode(9409625,36894320,72883039) and c:IsReason(REASON_EFFECT) and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_ONFIELD)
 end
 
 function s.sephylon(c)
