@@ -2,21 +2,7 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate Skill
-	aux.AddSkillProcedure(c,2,false,nil,nil)
-	local e1=Effect.CreateEffect(c)
-	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
-	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e1:SetCode(EVENT_STARTUP)
-	e1:SetCountLimit(1)
-	e1:SetRange(0x5f)
-	e1:SetLabel(0)
-	e1:SetOperation(s.op)
-	c:RegisterEffect(e1)
 	aux.AddSkillProcedure(c,2,false,s.flipcon2,s.flipop2)
-end
-
-function s.op(e,tp,eg,ep,ev,re,r,rp)
-	e:SetLabel(1)
 end
 
 
@@ -43,11 +29,11 @@ function s.flipop2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,tp,id)
 	--Boolean check for effect 1:
 	local b1=Duel.GetFlagEffect(tp, id+1)==0
-		and Duel.IsExistingMatchingCard(s.high_level_filter, tp, LOCATION_MZONE, 0, 1, nil)
+		and Duel.IsExistingMatchingCard(s.sendToGrave,tp,LOCATION_HAND,0,1,nil)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 
 	local b2=Duel.GetFlagEffect(tp, id+2)==0
-		and Duel.IsExistingMatchingCard(s.high_level_filter, tp, LOCATION_MZONE, 0, 1, nil)
+		and Duel.IsExistingMatchingCard(s.sendToGrave,tp,LOCATION_HAND,0,1,nil)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 
 	local op=Duel.SelectEffect(tp, {b1,aux.Stringid(id,0)},
