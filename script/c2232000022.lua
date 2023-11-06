@@ -103,7 +103,7 @@ local timelords={511009711,511009713,511009714,511600223,511027009}
 function s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.SelectMatchingCard(tp,s.sephylon,tp,LOCATION_HAND,0,1, 1,nil):GetFirst()
 	if tc then
-		for i=timelords do
+		for i=1,timelords do
 			local g=Duel.CreateToken(tp,i)
 			 Duel.SendtoGrave(g,tp,SEQ_DECKTOP,REASON_EFFECT)
 		end
