@@ -103,9 +103,10 @@ local timelords={511009711,511009713,511009714,511600223,511027009}
 function s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.SelectMatchingCard(tp,s.sephylon,tp,LOCATION_HAND,0,1, 1,nil):GetFirst()
 	if tc then
-	   Duel.Hint(HINT_CARD,tp,id)
-		local g=Duel.CreateToken(tp,timelords)
-		Duel.SendtoGrave(g,tp,SEQ_DECKTOP,REASON_EFFECT)
+		for i=1,2 do
+			local g=Duel.CreateToken(tp,511009711)
+			 Duel.SendtoGrave(g,tp,SEQ_DECKTOP,REASON_EFFECT)
+		end
 	end
 	Duel.RegisterFlagEffect(tp,id+2,0,0,0)
 end
