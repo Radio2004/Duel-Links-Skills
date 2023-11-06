@@ -24,7 +24,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.cfilter(c,tp,rp)
-	return c:IsCode(9409625) 
+	return c:IsCode(9409625) and c:IsPreviousControler(tp) and rp==1-tp and c:IsReason(REASON_EFFECT)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
