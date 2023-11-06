@@ -2,7 +2,6 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate Skill
-	aux.AddSkillProcedure(c,2,false,nil,nil)
 	aux.AddSkillProcedure(c,2,false,s.flipcon2,s.flipop2)
 end
 
