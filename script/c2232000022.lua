@@ -52,6 +52,7 @@ function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 	local b1=Duel.GetFlagEffect(tp,id+1)==0
 		and Duel.IsExistingMatchingCard(s.sendToGrave,tp,LOCATION_HAND,0,1,nil)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
+
 	local b2=Duel.GetFlagEffect(tp,id+2)==0 and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil) and Duel.GetFlagEffect(tp,id+3)~=0
 
 	return aux.CanActivateSkill(tp) and (b1 or b2)
@@ -97,8 +98,14 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterFlagEffect(tp,id+1,0,0,0)
 end
 
+local timelords={511009711,511009713,511009714,511600223,511027009}
+
 function s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
-	local cearth=Duel.CreateToken(tp, 9409625)
-	Duel.SSet(tp,cearth)
+	local tc=Duel.SelectMatchingCard(tp,s.sephylon,tp,LOCATION_HAND,0,1 1,nil):GetFirst()
+	if tc then
+	   Duel.Hint(HINT_CARD,tp,id)
+		local g=Duel.CreateToken(tp,timelords)
+		Duel.SendtoGrave(g,tp,SEQ_DECKTOP,REASON_EFFECT)
+	end
 	Duel.RegisterFlagEffect(tp,id+2,0,0,0)
 end
