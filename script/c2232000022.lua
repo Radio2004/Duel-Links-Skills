@@ -10,6 +10,15 @@ function s.sendToGrave(c)
 	return c:IsAbleToGraveAsCost()
 end
 
+function s.removedFromField(c,tp)
+	return c:GetReasonPlayer()==1-tp and c:IsCode(9409625,36894320,72883039) and c:IsReason(REASON_EFFECT) and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_ONFIELD)
+end
+
+function s.sephylon(c)
+	return c:IsCode(8967776) and not c:IsPublic()
+end
+
+
 
 function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 	--OPT check
@@ -19,8 +28,7 @@ function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.IsExistingMatchingCard(s.sendToGrave,tp,LOCATION_HAND,0,1,nil)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 	local b2=Duel.GetFlagEffect(tp,id+2)==0
-		and Duel.IsExistingMatchingCard(s.sendToGrave,tp,LOCATION_HAND,0,1,nil)
-		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
+		and eg:IsExists(s.removedFromField,1,nil,tp) and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil)
 
 	return aux.CanActivateSkill(tp) and (b1 or b2)
 end
