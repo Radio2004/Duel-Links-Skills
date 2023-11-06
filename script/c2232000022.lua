@@ -51,8 +51,18 @@ end
 function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 	local tg=Duel.SelectMatchingCard(tp,s.sendToGrave,tp,LOCATION_HAND,0,1,1,false,nil)
 	if Duel.SendtoGrave(tg,REASON_EFFECT) then
-		local cearth=Duel.CreateToken(tp, 9409625)
-		Duel.SSet(tp,cearth)
+		local cearth=Duel.CreateToken(tp,9409625)
+		if Duel.SSet(tp,cearth)>0 then
+			--Can be activated the turn it was Set
+			local e1=Effect.CreateEffect(e:GetHandler())
+			e1:SetDescription(aux.Stringid(id,2))
+			e1:SetType(EFFECT_TYPE_SINGLE)
+			e1:SetCode(EFFECT_TRAP_ACT_IN_SET_TURN)
+			e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
+			e1:SetReset(RESET_EVENT|RESETS_STANDARD)
+			cearth:GetFirst():RegisterEffect(e1)
+
+		end
 	end
 	Duel.RegisterFlagEffect(tp,id+1,0,0,0)
 end
