@@ -98,7 +98,7 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterFlagEffect(tp,id+1,0,0,0)
 end
 
-local timelords={511009711,511009713,511009714,511600223,511027009}
+local timelords={33015627,6616912,7733560,28929131,34137269,60222213,65314286,74530899,91712985,92435533}
 
 function s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.SelectMatchingCard(tp,s.sephylon,tp,LOCATION_HAND,0,1, 1,nil):GetFirst()
