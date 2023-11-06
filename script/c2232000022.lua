@@ -105,7 +105,7 @@ function s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
 	if tc then
 		for i=1,#timelords do
 			local g=Duel.CreateToken(tp,timelords[i])
-			 Duel.SendtoGrave(g,tp,SEQ_DECKTOP,REASON_EFFECT)
+			 Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	end
 	Duel.RegisterFlagEffect(tp,id+2,0,0,0)
