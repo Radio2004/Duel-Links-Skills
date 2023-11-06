@@ -2,9 +2,39 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate Skill
+	local e1=Effect.CreateEffect(c)
+	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
+	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e1:SetCode(EVENT_STARTUP)
+	e1:SetCountLimit(1)
+	e1:SetRange(0x5f)
+	e1:SetLabel(0)
+	e1:SetOperation(s.op)
 	aux.AddSkillProcedure(c,2,false,s.flipcon2,s.flipop2)
 end
 
+function s.op(e,tp,eg,ep,ev,re,r,rp)
+	if e:GetLabel()==0 then
+		local e1=Effect.CreateEffect(e:GetHandler())
+		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		e1:SetCode(EVENT_LEAVE_FIELD)
+		e1:SetCondition(s.spcon)
+		e1:SetOperation(s.btop)
+		Duel.RegisterEffect(e1,tp)
+	end
+	e:SetLabel(1)
+end
+
+function s.cfilter(c,tp,rp)
+	return c:IsCode(9409625,36894320,72883039) and c:IsPreviousControler(tp) and rp==1-tp and c:IsReason(REASON_EFFECT)
+end
+function s.spcon(e,tp,eg,ep,ev,re,r,rp)
+	return eg:IsExists(s.cfilter,1,nil,tp)
+end
+
+function s.btop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,2)
+end
 
 function s.sendToGrave(c)
 	return c:IsAbleToGraveAsCost()
@@ -27,8 +57,7 @@ function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 	local b1=Duel.GetFlagEffect(tp,id+1)==0
 		and Duel.IsExistingMatchingCard(s.sendToGrave,tp,LOCATION_HAND,0,1,nil)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
-	local b2=Duel.GetFlagEffect(tp,id+2)==0
-		and eg:IsExists(s.removedFromField,1,nil,tp) and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil)
+	local b2=Duel.GetFlagEffect(tp,id+2)==0 and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil) and Duel.GetFlagEffect(tp,id)~=0
 
 	return aux.CanActivateSkill(tp) and (b1 or b2)
 end
@@ -74,7 +103,6 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
-	local tg=Duel.SelectMatchingCard(tp, s.genexcontroller_send_filter,tp, LOCATION_HAND,0,1,1,false,nil)
 	local cearth=Duel.CreateToken(tp, 9409625)
 	Duel.SSet(tp,cearth)
 	Duel.RegisterFlagEffect(tp,id+2,0,0,0)
