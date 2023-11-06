@@ -44,19 +44,21 @@ function s.flipop2(e,tp,eg,ep,ev,re,r,rp)
 		s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 	elseif op==1 then
 		s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
-	else
-		s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 
 --op=0 set 1 "Empty Machine" from outside the duel to your Spell/Trap Zone.
 function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
-	local cearth=Duel.CreateToken(tp, 9409625)
-	Duel.SSet(tp,cearth)
+	local tg=Duel.SelectMatchingCard(tp,s.sendToGrave,tp,LOCATION_HAND,0,1,1,false,nil)
+	if Duel.SendtoGrave(tg,REASON_EFFECT) then
+		local cearth=Duel.CreateToken(tp, 9409625)
+		Duel.SSet(tp,cearth)
+	end
 	Duel.RegisterFlagEffect(tp,id+1,0,0,0)
 end
 
 function s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
+	local tg=Duel.SelectMatchingCard(tp, s.genexcontroller_send_filter,tp, LOCATION_HAND,0,1,1,false,nil)
 	local cearth=Duel.CreateToken(tp, 9409625)
 	Duel.SSet(tp,cearth)
 	Duel.RegisterFlagEffect(tp,id+2,0,0,0)
