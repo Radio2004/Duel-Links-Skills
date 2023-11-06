@@ -15,16 +15,19 @@ function s.initial_effect(c)
 end
 
 function s.op(e,tp,eg,ep,ev,re,r,rp)
+	if e:GetLabel()==0 then
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_LEAVE_FIELD)
 		e1:SetCondition(s.spcon)
 		e1:SetOperation(s.btop)
 		Duel.RegisterEffect(e1,tp)
+	end
+	e:SetLabel(1)
 end
 
 function s.cfilter(c,tp)
-	return c:IsCode(9409625) and c:GetReasonPlayer()==1-tp and c:IsReason(REASON_EFFECT) and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_ONFIELD)
+	return c:IsCode(9409625,36894320,72883039) and c:GetReasonPlayer()==1-tp and c:IsReason(REASON_EFFECT) and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_ONFIELD)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
