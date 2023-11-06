@@ -23,8 +23,8 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e1,tp)
 end
 
-function s.cfilter(c,tp,rp)
-	return c:IsCode(9409625) and c:IsPreviousControler(tp) and rp==1-tp and c:IsReason(REASON_EFFECT)
+function s.cfilter(c,tp)
+	return c:IsCode(9409625) and c:IsPreviousControler(tp) and c:IsReason(REASON_EFFECT)
 end
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
@@ -41,8 +41,6 @@ end
 function s.sephylon(c)
 	return c:IsCode(8967776) and not c:IsPublic()
 end
-
-
 
 function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 	--OPT check
