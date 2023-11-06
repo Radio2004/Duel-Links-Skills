@@ -60,7 +60,7 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetCode(EFFECT_TRAP_ACT_IN_SET_TURN)
 			e1:SetProperty(EFFECT_FLAG_SET_AVAILABLE)
 			e1:SetReset(RESET_EVENT|RESETS_STANDARD)
-			cearth:GetFirst():RegisterEffect(e1)
+			cearth:RegisterEffect(e1)
 
 		end
 	end
