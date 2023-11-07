@@ -20,7 +20,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_LEAVE_FIELD)
 		e1:SetCondition(s.spcon)
-		e1:SetOperation(s.btop)
+		e1:SetOperation(s.levreg)
 		Duel.RegisterEffect(e1,tp)
 	end
 	e:SetLabel(1)
@@ -33,7 +33,8 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
 end
 
-function s.btop(e,tp,eg,ep,ev,re,r,rp)
+function s.levreg(e,tp,eg,ep,ev,re,r,rp)
+	e:SetLabel(Duel.GetTurnCount())
 	Duel.RegisterFlagEffect(tp,id+3,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,2)
 end
 
@@ -53,7 +54,7 @@ function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.IsExistingMatchingCard(s.sendToGrave,tp,LOCATION_HAND,0,1,nil)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 
-	local b2=Duel.GetFlagEffect(tp,id+2)==0 and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil) and Duel.GetFlagEffect(tp,id+3)~=0
+	local b2=Duel.GetFlagEffect(tp,id+2)==0 and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil) and Duel.GetFlagEffect(tp,id+3)~=0 and e:GetLabel()~=Duel.GetTurnCount()
 
 	return aux.CanActivateSkill(tp) and (b1 or b2)
 end
