@@ -11,7 +11,6 @@ function s.initial_effect(c)
 	e1:SetLabel(0)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
-	aux.AddSkillProcedure(c,1,false,s.flipcon2,s.flipop2)
 end
 
 function s.op(e,tp,eg,ep,ev,re,r,rp)
@@ -22,6 +21,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCondition(s.spcon)
 		e1:SetOperation(s.levreg)
 		Duel.RegisterEffect(e1,tp)
+		aux.AddSkillProcedure(c,1,false,s.flipcon2,s.flipop2)
 	end
 	e:SetLabel(1)
 end
