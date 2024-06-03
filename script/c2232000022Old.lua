@@ -35,6 +35,7 @@ end
 
 function s.levreg(e,tp,eg,ep,ev,re,r,rp)
 	e:SetLabel(Duel.GetTurnCount())
+	Duel.RegisterFlagEffect(tp,Duel.GetTurnCount(),RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,2)
 end
 
 function s.sendToGrave(c)
@@ -53,7 +54,7 @@ function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.IsExistingMatchingCard(s.sendToGrave,tp,LOCATION_HAND,0,1,nil)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 
-	local b2=Duel.GetFlagEffect(tp,id+2)==0 and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil) and Duel.GetFlagEffect(tp,id+3)~=0
+	local b2=Duel.GetFlagEffect(tp,id+2)==0 and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil) and Duel.GetFlagEffect(tp,id+3)~=0 and e:GetLabel()~=Duel.GetTurnCount()
 
 	return aux.CanActivateSkill(tp) and (b1 or b2)
 end
@@ -105,7 +106,7 @@ function s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
 	if tc then
 		for i=1,#timelords do
 			local g=Duel.CreateToken(tp,timelords[i])
-			Duel.SendtoGrave(g,REASON_EFFECT)
+			 Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	end
 	Duel.RegisterFlagEffect(tp,id+2,0,0,0)
