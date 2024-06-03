@@ -54,7 +54,7 @@ function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.IsExistingMatchingCard(s.sendToGrave,tp,LOCATION_HAND,0,1,nil)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 
-	local b2=Duel.GetFlagEffect(tp,id+2)==0 and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil) and Duel.GetFlagEffect(tp,id+3)~=0 and e:GetLabel()~=Duel.GetTurnCount()
+	local b2=Duel.GetFlagEffect(tp,id+2)==0 and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil)
 
 	return aux.CanActivateSkill(tp) and (b1 or b2)
 end
