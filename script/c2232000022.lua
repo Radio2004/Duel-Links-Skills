@@ -35,7 +35,7 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.levreg(e,tp,eg,ep,ev,re,r,rp)
-	e:SetLabel(6))
+	e:SetLabel(6)
 	print(Duel.GetFlagEffect())
 	print('Hello')
 end
