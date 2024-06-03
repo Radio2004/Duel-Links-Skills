@@ -36,7 +36,7 @@ end
 
 function s.levreg(e,tp,eg,ep,ev,re,r,rp)
 	e:SetLabel(6)
-	Debug.Message(Duel.GetFlagEffect(tp,id+3))
+	Debug.Message(e:GetLabel())
 	Debug.Message('Hello')
 end
 
