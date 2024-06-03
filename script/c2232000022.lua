@@ -29,13 +29,15 @@ end
 function s.cfilter(c,tp)
 	return c:IsCode(9409625,36894320,72883039) and c:GetReasonPlayer()==1-tp and c:IsReason(REASON_EFFECT) and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_ONFIELD)
 end
+
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
 end
 
 function s.levreg(e,tp,eg,ep,ev,re,r,rp)
 	e:SetLabel(Duel.GetTurnCount())
-	print(Duel.GetFlagEffect)
+	print(Duel.GetFlagEffect())
+	print('Hello')
 end
 
 function s.sendToGrave(c)
