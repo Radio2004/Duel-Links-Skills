@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetLabel(0)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
-	aux.AddSkillProcedure(c,1,false,s.flipcon2,s.flipop2)
+	aux.AddSkillProcedure(c,3,false,s.flipcon2,s.flipop2)
 end
 
 function s.op(e,tp,eg,ep,ev,re,r,rp)
@@ -36,7 +36,7 @@ end
 
 function s.levreg(e,tp,eg,ep,ev,re,r,rp)
 	e:SetLabel(1)
-	Duel.RegisterFlagEffect(tp,id+3,0,0,0)
+	Duel.RegisterFlagEffect(tp,id+2,0,0,0)
 end
 
 function s.sendToGrave(c)
@@ -49,7 +49,7 @@ end
 
 function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 	--OPT check
-	if Duel.GetFlagEffect(tp,id+1)>0 and Duel.GetFlagEffect(tp,id+2)>0 then return end
+	if Duel.GetFlagEffect(tp,id)>0 and Duel.GetFlagEffect(tp,id+1)>0 then return end
 	--Boolean checks for the activation condition: b1, b2
 	local b1=Duel.GetFlagEffect(tp,id+1)==0
 		and Duel.IsExistingMatchingCard(s.sendToGrave,tp,LOCATION_HAND,0,1,nil)
@@ -66,11 +66,11 @@ function s.flipop2(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
 	--Boolean check for effect 1:
-	local b1=Duel.GetFlagEffect(tp, id+1)==0
+	local b1=Duel.GetFlagEffect(tp, id)==0
 		and Duel.IsExistingMatchingCard(s.sendToGrave,tp,LOCATION_HAND,0,1,nil)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 
-	local b2=Duel.GetFlagEffect(tp,id+2)==0 and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil) and Duel.GetFlagEffect(tp,id+3)~=0
+	local b2=Duel.GetFlagEffect(tp,id+1)==0 and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil) and Duel.GetFlagEffect(tp,id+2)~=0
 
 	local op=Duel.SelectEffect(tp, {b1,aux.Stringid(id,0)},
 								   {b2,aux.Stringid(id,1)})
@@ -100,7 +100,7 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 
 		end
 	end
-	Duel.RegisterFlagEffect(tp,id+1,0,0,0)
+	Duel.RegisterFlagEffect(tp,id,0,0,0)
 end
 
 local timelords={33015627,6616912,7733560,28929131,34137269,60222213,65314286,74530899,91712985,92435533}
@@ -113,5 +113,5 @@ function s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
 			 Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	end
-	Duel.RegisterFlagEffect(tp,id+2,0,0,0)
+	Duel.RegisterFlagEffect(tp,id+1,0,0,0)
 end
