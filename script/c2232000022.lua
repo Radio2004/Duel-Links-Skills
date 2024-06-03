@@ -36,8 +36,8 @@ end
 
 function s.levreg(e,tp,eg,ep,ev,re,r,rp)
 	e:SetLabel(6)
-	print(Duel.GetFlagEffect(tp,id+3))
-	print('Hello')
+	Debug.Message(Duel.GetFlagEffect(tp,id+3))
+	Debug.Message('Hello')
 end
 
 function s.sendToGrave(c)
