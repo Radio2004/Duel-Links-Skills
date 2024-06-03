@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetLabel(0)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
-	aux.AddSkillProcedure(c,2,false,s.flipcon2,s.flipop2)
+	aux.AddSkillProcedure(c,1,false,s.flipcon2,s.flipop2)
 end
 
 function s.op(e,tp,eg,ep,ev,re,r,rp)
@@ -36,7 +36,7 @@ end
 
 function s.levreg(e,tp,eg,ep,ev,re,r,rp)
 	e:SetLabel(1)
-	Duel.RegisterFlagEffect(tp,id+3,RESET_EVENT+RESETS_STANDARD,0,0)
+	Duel.RegisterFlagEffect(tp,id+3,0,0,0)
 end
 
 function s.sendToGrave(c)
