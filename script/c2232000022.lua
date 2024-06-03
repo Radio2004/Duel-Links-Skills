@@ -35,6 +35,7 @@ end
 
 function s.levreg(e,tp,eg,ep,ev,re,r,rp)
 	e:SetLabel(Duel.GetTurnCount())
+	print(Duel.GetFlagEffect)
 end
 
 function s.sendToGrave(c)
@@ -53,7 +54,7 @@ function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.IsExistingMatchingCard(s.sendToGrave,tp,LOCATION_HAND,0,1,nil)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 
-	local b2=Duel.GetFlagEffect(tp,id+2)==0 and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil)
+	local b2=Duel.GetFlagEffect(tp,id+2)==0 and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil) and Duel.GetFlagEffect(tp,id+3)~=0
 
 	return aux.CanActivateSkill(tp) and (b1 or b2)
 end
@@ -65,11 +66,10 @@ function s.flipop2(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.IsExistingMatchingCard(s.sendToGrave,tp,LOCATION_HAND,0,1,nil)
 		and Duel.GetLocationCount(tp,LOCATION_SZONE)>0
 
-	local b2=Duel.GetFlagEffect(tp,id+2)==0 and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil)
+	local b2=Duel.GetFlagEffect(tp,id+2)==0 and Duel.IsExistingMatchingCard(s.sephylon,tp,LOCATION_HAND,0,1,nil) and Duel.GetFlagEffect(tp,id+3)~=0
 
 	local op=Duel.SelectEffect(tp, {b1,aux.Stringid(id,0)},
 								   {b2,aux.Stringid(id,1)})
-	
 	op=op-1 --SelectEffect returns indexes starting at 1, so we decrease the result by 1 to match your "if"s
 
 	if op==0 then
@@ -106,7 +106,7 @@ function s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
 	if tc then
 		for i=1,#timelords do
 			local g=Duel.CreateToken(tp,timelords[i])
-			Duel.SendtoGrave(g,REASON_EFFECT)
+			 Duel.SendtoGrave(g,REASON_EFFECT)
 		end
 	end
 	Duel.RegisterFlagEffect(tp,id+2,0,0,0)
