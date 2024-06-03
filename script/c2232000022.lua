@@ -18,7 +18,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetLabel()==0 then
 
 		local g=Duel.GetDecktopGroup(tp,math.floor(Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)/2))
-		local con = Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_DECK, 0,1,nil, 36894320) and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_DECK, 0,1,nil 72883039) and (g:IsExists(Card.IsSetCard,1,nil,0x4a) or g:IsExists(Card.IsCode,1,nil,27107590))
+		local con = Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_DECK, 0,1,nil, 36894320) and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_DECK, 0,1,nil,72883039) and (g:IsExists(Card.IsSetCard,1,nil,0x4a) or g:IsExists(Card.IsCode,1,nil,27107590))
 
 		if con then
 			Duel.RegisterFlagEffect(tp,id,0,0,0)
