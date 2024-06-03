@@ -35,7 +35,6 @@ end
 
 function s.levreg(e,tp,eg,ep,ev,re,r,rp)
 	e:SetLabel(Duel.GetTurnCount())
-	Duel.RegisterFlagEffect(tp,Duel.GetTurnCount(),RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END+RESET_SELF_TURN,0,2)
 end
 
 function s.sendToGrave(c)
@@ -70,6 +69,7 @@ function s.flipop2(e,tp,eg,ep,ev,re,r,rp)
 
 	local op=Duel.SelectEffect(tp, {b1,aux.Stringid(id,0)},
 								   {b2,aux.Stringid(id,1)})
+	
 	op=op-1 --SelectEffect returns indexes starting at 1, so we decrease the result by 1 to match your "if"s
 
 	if op==0 then
