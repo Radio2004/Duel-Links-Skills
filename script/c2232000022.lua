@@ -29,7 +29,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.GetFieldGroup(tp,LOCATION_DECK,0)
 		local timelords = g:Filter(s.filterTimelords,nil)
 		local anotherMonster = g:FilterCount(s.monster,timelords)
-		local con = g:IsExists(Card.IsCode,nil,36894320) and g:IsExists(Card.IsCode,nil,72883039) and #timelords > anotherMonster
+		local con = g:IsExists(Card.IsCode,1,nil,36894320) and g:IsExists(Card.IsCode,1,nil,72883039) and #timelords > anotherMonster
 		if not con then
 			Duel.RegisterFlagEffect(tp,id,0,0,0)
 			Duel.RegisterFlagEffect(tp,id+1,0,0,0)
