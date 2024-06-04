@@ -12,13 +12,15 @@ function s.initial_effect(c)
 	e1:SetLabel(0)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
-	aux.AddSkillProcedure(c,1,false,s.flipcon2,s.flipop2)
 end
+
+local count = 0
 
 
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
+	count = count + 3
 	local c=e:GetHandler()
 	if e:GetLabel()==0 then
 		--spsummon limit
@@ -32,6 +34,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		local e3=e2:Clone(e2)
 		e3:SetCode(EFFECT_CANNOT_SUMMON)
 		Duel.RegisterEffect(e3,tp)
+		Debug.Message(count)
 	end
 	e:SetLabel(1)
 end
