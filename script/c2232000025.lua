@@ -15,56 +15,29 @@ function s.initial_effect(c)
 	aux.AddSkillProcedure(c,1,false,s.flipcon2,s.flipop2)
 end
 
-function s.filterTimelords(c)
-	return c:IsSetCard(0x4a) or c:IsCode(27107590)
-end
-
-function s.monster(c)
-	return c:IsMonster()
-end
-
 
 function s.op(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
+	Duel.Hint(HINT_CARD,tp,id)
 	if e:GetLabel()==0 then
-
-		local g=Duel.GetFieldGroup(tp,LOCATION_DECK,0)
-		local timelords = g:Filter(s.filterTimelords,nil)
-		local anotherMonster = g:FilterCount(s.monster,timelords)
-		local con = g:IsExists(Card.IsCode,1,nil,36894320) and g:IsExists(Card.IsCode,1,nil,72883039) and #timelords > anotherMonster
-		if not con then
-			Duel.RegisterFlagEffect(tp,id,0,0,0)
-			Duel.RegisterFlagEffect(tp,id+1,0,0,0)
-		end
-		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		e1:SetCode(EVENT_LEAVE_FIELD)
-		e1:SetCondition(s.spcon)
-		e1:SetOperation(s.levreg)
-		Duel.RegisterEffect(e1,tp)
+		--spsummon limit
+		local e2=Effect.CreateEffect(c)
+		e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		e2:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
+		e2:SetTargetRange(1,0)
+		e2:SetTarget(s.splimit)
+		Duel.RegisterEffect(e2,tp)
+		local e3=e1:Clone(e2)
+		e3:SetCode(EFFECT_CANNOT_SUMMON)
+		Duel.RegisterEffect(e3,tp)
 	end
 	e:SetLabel(1)
 end
 
-function s.cfilter(c,tp)
-	return c:IsCode(9409625,36894320,72883039) and c:GetReasonPlayer()==1-tp and c:IsReason(REASON_EFFECT) and c:IsPreviousControler(tp) and c:IsPreviousLocation(LOCATION_ONFIELD)
+function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
+	return not c:IsRace(RACE_CYBERSE)
 end
 
-function s.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(s.cfilter,1,nil,tp)
-end
-
-function s.levreg(e,tp,eg,ep,ev,re,r,rp)
-	e:SetLabel(1)
-	Duel.RegisterFlagEffect(tp,id+2,0,0,0)
-end
-
-function s.sendToGrave(c)
-	return c:IsAbleToGraveAsCost()
-end
-
-function s.sephylon(c)
-	return c:IsCode(8967776) and not c:IsPublic()
-end
 
 function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 	--OPT check
