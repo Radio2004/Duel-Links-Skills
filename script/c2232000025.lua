@@ -23,7 +23,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetLabel()==0 then
 		--spsummon limit
 		local e2=Effect.CreateEffect(c)
-		e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		e2:SetType(EFFECT_TYPE_FIELD)
 		e2:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
 		e2:SetTargetRange(1,0)
 		e2:SetTarget(s.splimit)
