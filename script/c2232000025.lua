@@ -19,6 +19,7 @@ end
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
+	local c=e:GetHandler()
 	if e:GetLabel()==0 then
 		--spsummon limit
 		local e2=Effect.CreateEffect(c)
