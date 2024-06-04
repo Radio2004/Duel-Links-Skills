@@ -14,7 +14,7 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 
-local count = 0
+count = 0
 
 
 function s.op(e,tp,eg,ep,ev,re,r,rp)
