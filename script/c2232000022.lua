@@ -28,7 +28,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 
 		local g=Duel.GetFieldGroup(tp,LOCATION_DECK,0)
 		local onlyMonsterTimelords = g:FilterCount(s.filterTimelords,nil)
-		local anotherMonster = g:FilterCount(s.monster,s.filterTimelords)
+		local anotherMonster = g:FilterCount(s.monster,onlyMonsterTimelords)
 		Debug.Message(anotherMonster)
 		local con = Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_DECK, 0,1,nil, 36894320) and Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_DECK, 0,1,nil,72883039) and (g:IsExists(Card.IsSetCard,1,nil,0x4a) or g:IsExists(Card.IsCode,1,nil,27107590))
 		if not con then
