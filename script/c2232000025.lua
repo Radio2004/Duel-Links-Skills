@@ -28,7 +28,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetTargetRange(1,0)
 		e2:SetTarget(s.splimit)
 		Duel.RegisterEffect(e2,tp)
-		local e3=e1:Clone(e2)
+		local e3=e2:Clone(e2)
 		e3:SetCode(EFFECT_CANNOT_SUMMON)
 		Duel.RegisterEffect(e3,tp)
 	end
