@@ -48,7 +48,7 @@ function s.thfilter(c)
 end
 
 
-function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
+function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--OPT check
 	if Duel.GetFlagEffect(tp,id)>0 and Duel.GetFlagEffect(tp,id+1)>0 then return end
 	--Boolean checks for the activation condition: b1, b2
@@ -60,4 +60,37 @@ function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 
 
 	return aux.CanActivateSkill(tp) and (b1 or b2)
+end
+
+function s.flipop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
+	Duel.Hint(HINT_CARD,tp,id)
+	--Boolean check for effect 1:
+	local b1=Duel.GetFlagEffect(tp,id)==0
+		and Duel.IsExistingMatchingCard(Card.IsLink,tp,LOCATION_EXTRA,0,1,nil,5)
+		and Duel.IsExistingMatchingCard(s.spcfilter,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
+
+	local b2=Duel.GetFlagEffect(tp,id+1)==0 and Duel.GetFlagEffect(tp,id+2)~=0
+
+	local op=Duel.SelectEffect(tp, {b1,aux.Stringid(id,0)},
+								   {b2,aux.Stringid(id,1)})
+	op=op-1 --SelectEffect returns indexes starting at 1, so we decrease the result by 1 to match your "if"s
+
+	if op==0 then
+		s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
+	elseif op==1 then
+		s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
+	end
+end
+
+function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
+	local tc=Duel.SelectMatchingCard(tp,s.spcfilter,tp,LOCATION_HAND,0,1,1,nil):GetFirst()
+	if tc then
+		local keyMonster={24731391,21065189,5043010,63533837,42717221}
+		for i=1,#keyMonster do
+			local g=Duel.CreateToken(tp,keyMonster[i])
+			 Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
+		end
+	end
+	Duel.RegisterFlagEffect(tp,id,0,0,0)
 end
