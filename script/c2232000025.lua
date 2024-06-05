@@ -43,6 +43,10 @@ function s.spcfilter(c)
 	return (c:IsSetCard(SET_FIREWALL) or c:IsRitualMonster()) and c:IsMonster() and not c:IsPublic()
 end
 
+function s.thfilter(c)
+	return c:IsSetCard(SET_CYNET) and c:IsSpell() and c:IsAbleToHand()
+end
+
 
 function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 	--OPT check
@@ -50,7 +54,7 @@ function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
 	--Boolean checks for the activation condition: b1, b2
 	local b1=Duel.GetFlagEffect(tp,id)==0
 		and Duel.IsExistingMatchingCard(Card.IsLink,tp,LOCATION_EXTRA,0,1,nil,5)
-		and Duel.IsExistingMatchingCard(s.spcfilter,tp,LOCATION_HAND,0,1,nil)
+		and Duel.IsExistingMatchingCard(s.spcfilter,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 
 	local b2=Duel.GetFlagEffect(tp,id+1)==0 and Duel.GetFlagEffect(tp,id+2)~=0
 
