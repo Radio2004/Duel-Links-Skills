@@ -12,6 +12,7 @@ function s.initial_effect(c)
 	e1:SetLabel(0)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
+	aux.AddSkillProcedure(c,1,false,s.flipcon,s.flipop)
 end
 
 function s.op(e,tp,eg,ep,ev,re,r,rp)
@@ -36,4 +37,23 @@ end
 
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return not c:IsRace(RACE_CYBERSE)
+end
+
+function s.spcfilter(c)
+	return (c:IsSetCard(SET_FIREWALL) or c:IsRitualMonster()) and c:IsMonster() and not c:IsPublic()
+end
+
+
+function s.flipcon2(e,tp,eg,ep,ev,re,r,rp)
+	--OPT check
+	if Duel.GetFlagEffect(tp,id)>0 and Duel.GetFlagEffect(tp,id+1)>0 then return end
+	--Boolean checks for the activation condition: b1, b2
+	local b1=Duel.GetFlagEffect(tp,id)==0
+		and Duel.IsExistingMatchingCard(Card.IsLink,tp,LOCATION_EXTRA,0,1,nil,5)
+		and Duel.IsExistingMatchingCard(s.spcfilter,tp,LOCATION_HAND,0,1,nil)
+
+	local b2=Duel.GetFlagEffect(tp,id+1)==0 and Duel.GetFlagEffect(tp,id+2)~=0
+
+
+	return aux.CanActivateSkill(tp) and (b1 or b2)
 end
