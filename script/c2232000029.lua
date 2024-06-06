@@ -51,7 +51,7 @@ function s.ntcon(e,c,minc)
 end
 
 function s.nttg(e,c)
-	return c:IsLevelAbove(5) and c:GetAttack()+c:GetDefense() == 4000
+	return c:IsLevelAbove(5) and c:IsDefense(+c:GetAttack())==4000
 end
 
 
