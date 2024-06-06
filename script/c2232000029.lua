@@ -34,6 +34,11 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	e:SetLabel(1)
 end
 
+function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
+	return not c:IsAttribute(ATTRIBUTE_DARK) and (c:IsRace(RACE_CYBERSE) or c:IsRace(RACE_DRAGON))
+end
+
+
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--OPT check
 	if Duel.GetFlagEffect(tp,id)>0 and Duel.GetFlagEffect(tp,id+1)>0 then return end
