@@ -90,7 +90,8 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 		for i=1,#keyMonster do
 			local g=Duel.CreateToken(tp,keyMonster[i])
 			 Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
-			 Duel.SpecialSummon(g,0,tp,tp,false,true,POS_FACEUP,LOCATION_REMOVED)
+			 Duel.SpecialSummon(g,0,tp,tp,true,true,POS_FACEUP,LOCATION_REMOVED)
+			 Duel.SpecialSummonComplete()
 		end
 	end
 	Duel.RegisterFlagEffect(tp,id,0,0,0)
