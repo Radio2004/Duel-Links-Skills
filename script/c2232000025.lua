@@ -51,8 +51,6 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
-	e:SetLabel(1)
-	Debug.Message("Hello")
 	Duel.RegisterFlagEffect(tp,id+2,0,0,0)
 end
 
