@@ -101,7 +101,8 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 		end
 		if Duel.GetTurnCount()>1 then
 			local rollback = Duel.CreateToken(tp,57900671)
-			Duel.SendtoHand(rollback,tp,REASON_EFFECT)
+			Duel.SendtoDeck(rollback,nil,0,REASON_RULE)
+			Duel.SendtoHand(rollback,tp,REASON_RULE)
 			Duel.ConfirmCards(1-tp,rollback)
 		end
 	end
