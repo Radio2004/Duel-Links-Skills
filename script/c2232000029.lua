@@ -19,20 +19,41 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,tp,id)
 	local c=e:GetHandler()
 	if e:GetLabel()==0 then
+		local e1=Effect.CreateEffect(e:GetHandler())
+		e1:SetDescription(aux.Stringid(id,2))
+		e1:SetType(EFFECT_TYPE_FIELD)
+		e1:SetCode(EFFECT_SUMMON_PROC)
+		e1:SetTargetRange(LOCATION_HAND,0)
+		e1:SetCondition(s.ntcon)
+		e1:SetTarget(aux.FieldSummonProcTg(s.nttg))
+		Duel.RegisterEffect(e1,tp)
+		local e2=e1:Clone()
+		e2:SetCode(EFFECT_SET_PROC)
+		c:RegisterEffect(e2)
 		--spsummon limit
-		local e2=Effect.CreateEffect(c)
-		e2:SetType(EFFECT_TYPE_FIELD)
-		e2:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-		e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-		e2:SetTargetRange(1,0)
-		e2:SetTarget(s.splimit)
-		Duel.RegisterEffect(e2,tp)
-		local e3=e2:Clone(e2)
-		e3:SetCode(EFFECT_CANNOT_SUMMON)
+		local e3=Effect.CreateEffect(c)
+		e3:SetType(EFFECT_TYPE_FIELD)
+		e3:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
+		e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+		e3:SetTargetRange(1,0)
+		e3:SetTarget(s.splimit)
 		Duel.RegisterEffect(e3,tp)
+		local e4=e3:Clone(e3)
+		e4:SetCode(EFFECT_CANNOT_SUMMON)
+		Duel.RegisterEffect(e4,tp)
 	end
 	e:SetLabel(1)
 end
+
+function s.ntcon(e,c,minc)
+	if c==nil then return true end
+	return minc==0 and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
+end
+
+function s.nttg(e,c)
+	return c:IsSetCard(0x3b13) and c:IsLevelAbove(5)
+end
+
 
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return not (c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_CYBERSE+RACE_DRAGON))
