@@ -88,9 +88,9 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 	if tc then
 		local keyMonster={24731391,21065189,5043010,63533837,42717221}
 		for i=1,#keyMonster do
-			local g=Duel.CreateToken(tp,keyMonster[i])
-			  Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
-			  g:CompleteProcedure()
+			local tg=Duel.CreateToken(tp,keyMonster[i])
+			Duel.Remove(tg,POS_FACEUP,REASON_EFFECT)
+			tg:CompleteProcedure()
 		end
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
