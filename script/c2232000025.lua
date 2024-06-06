@@ -72,6 +72,9 @@ function s.thfilter(c)
 	return c:IsSetCard(SET_CYNET) and c:IsSpell() and c:IsAbleToHand()
 end
 
+function s.sfilter(c)
+	return c:IsCode(1861629) and c:IsSummonType(SUMMON_TYPE_SPECIAL)
+end
 
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--OPT check
@@ -82,7 +85,7 @@ function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.IsExistingMatchingCard(Card.IsLink,tp,LOCATION_EXTRA,0,1,nil,5)
 		and Duel.IsExistingMatchingCard(s.spcfilter,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 
-	local b2=Duel.GetFlagEffect(tp,id+1)==0 and Duel.GetFlagEffect(tp,id+2)~=0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REMOVED+LOCATION_GRAVE,0,1,nil)
+	local b2=Duel.GetFlagEffect(tp,id+1)==0 and Duel.IsExistingTarget(s.sfilter,tp,LOCATION_MZONE+LOCATION_EXTRA+LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil) and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REMOVED+LOCATION_GRAVE,0,1,nil)
 
 
 	return aux.CanActivateSkill(tp) and (b1 or b2)
@@ -96,7 +99,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 		and Duel.IsExistingMatchingCard(Card.IsLink,tp,LOCATION_EXTRA,0,1,nil,5)
 		and Duel.IsExistingMatchingCard(s.spcfilter,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 
-	local b2=Duel.GetFlagEffect(tp,id+1)==0 and Duel.GetFlagEffect(tp,id+2)~=0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REMOVED+LOCATION_GRAVE,0,1,nil)
+	local b2=Duel.GetFlagEffect(tp,id+1)==0 and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_REMOVED+LOCATION_GRAVE,0,1,nil)
 
 	local op=Duel.SelectEffect(tp, {b1,aux.Stringid(id,0)},
 								   {b2,aux.Stringid(id,1)})
