@@ -25,6 +25,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EVENT_SPSUMMON_SUCCESS)
 		e1:SetCondition(s.spcon)
 		e1:SetOperation(s.spop)
+		Duel.RegisterEffect(e1,tp)
 		--spsummon limit
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_FIELD)
