@@ -52,7 +52,6 @@ function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--OPT check
 	if Duel.GetFlagEffect(tp,id)>0 and Duel.GetFlagEffect(tp,id+1)>0 then return end
 
-	Debug.Message(Duel.GetTurnCount())
 	--Boolean checks for the activation condition: b1, b2
 	local b1=Duel.GetFlagEffect(tp,id)==0
 		and Duel.IsExistingMatchingCard(Card.IsLink,tp,LOCATION_EXTRA,0,1,nil,5)
@@ -99,6 +98,11 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 		if #g>0 then
 			Duel.SendtoHand(g,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,g)
+		end
+		if Duel.GetTurnCount()>1 then
+			local rollback = Duel.CreateToken(tp,57900671)
+			Duel.SendtoHand(rollback,nil,REASON_RULE)
+			Duel.ConfirmCards(1-tp,rollback)
 		end
 	end
 	Duel.RegisterFlagEffect(tp,id,0,0,0)
