@@ -51,7 +51,7 @@ function s.ntcon(e,c,minc)
 end
 
 function s.nttg(e,c)
-	return c:IsSetCard(0x3b13) and c:IsLevelAbove(5)
+	return c:IsLevelAbove(5)
 end
 
 
