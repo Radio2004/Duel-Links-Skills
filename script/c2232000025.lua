@@ -20,6 +20,11 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,tp,id)
 	local c=e:GetHandler()
 	if e:GetLabel()==0 then
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_FIELD)
+		e1:SetCode(EVENT_SPSUMMON_SUCCESS)
+		e1:SetCondition(s.spcon)
+		e1:SetOperation(s.spop)
 		--spsummon limit
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_FIELD)
@@ -34,6 +39,22 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	end
 	e:SetLabel(1)
 end
+
+function s.decodefilter(c,tp)
+	return c:IsFaceup() and c:IsControler(tp) and c:IsCode(1861629)
+end
+
+function s.spcon(e,tp,eg,ep,ev,re,r,rp)
+	if Duel.GetFlagEffect(tp,id+2)>0 then return end
+	return eg:IsExists(s.decodefilter,1,nil,tp)
+end
+
+function s.spop(e,tp,eg,ep,ev,re,r,rp)
+	e:SetLabel(1)
+	Debug.Message("Hello")
+	Duel.RegisterFlagEffect(tp,id+2,0,0,0)
+end
+
 
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return not c:IsRace(RACE_CYBERSE)
