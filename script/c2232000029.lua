@@ -29,7 +29,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e1,tp)
 		local e2=e1:Clone()
 		e2:SetCode(EFFECT_SET_PROC)
-		c:RegisterEffect(e2)
+		c:RegisterEffect(e2,tp)
 		--spsummon limit
 		local e3=Effect.CreateEffect(c)
 		e3:SetType(EFFECT_TYPE_FIELD)
