@@ -91,7 +91,6 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 			local g=Duel.CreateToken(tp,keyMonster[i])
 			  Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 			  g:CompleteProcedure()
-				--CompleteProcedure
 		end
 	end
 	Duel.RegisterFlagEffect(tp,id,0,0,0)
