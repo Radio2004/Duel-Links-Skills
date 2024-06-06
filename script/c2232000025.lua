@@ -92,6 +92,12 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 			  Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 			  g:CompleteProcedure()
 		end
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+		local g=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
+		if #g>0 then
+			Duel.SendtoHand(g,nil,REASON_EFFECT)
+			Duel.ConfirmCards(1-tp,g)
+		end
 	end
 	Duel.RegisterFlagEffect(tp,id,0,0,0)
 end
