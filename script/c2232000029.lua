@@ -35,7 +35,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return not c:IsAttribute(ATTRIBUTE_DARK) and not (c:IsRace(RACE_CYBERSE) or c:IsRace(RACE_DRAGON))
+	return not c:IsAttribute(ATTRIBUTE_DARK) and not (c:IsRace(RACE_CYBERSE) or not c:IsRace(RACE_DRAGON))
 end
 
 
