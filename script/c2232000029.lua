@@ -54,6 +54,9 @@ function s.nttg(e,c)
 	return c:IsLevelAbove(5) and c:GetDefense()+c:GetAttack()==4000
 end
 
+function s.filter(c,e,tp)
+	return Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsLink(2) and c:IsSetCard(0x10f)
+end
 
 function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return not (c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_CYBERSE+RACE_DRAGON))
@@ -99,6 +102,11 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
-	
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
+	)
+	if #g>0 then
+		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
+	end
 	Duel.RegisterFlagEffect(tp,id+1,0,0,0)
 end
