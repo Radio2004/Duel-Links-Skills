@@ -137,8 +137,7 @@ function s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_REMOVED+LOCATION_GRAVE,0,1,5,nil)
 	if #g>0 then
-		Duel.ConfirmCards(1-tp,g)
-		Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
+		Duel.SendtoDeck(g,nil,0,REASON_RULE)
 	end
 	Duel.RegisterFlagEffect(tp,id+1,0,0,0)
 end
