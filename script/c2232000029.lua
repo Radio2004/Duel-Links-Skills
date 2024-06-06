@@ -37,10 +37,10 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 		e3:SetTargetRange(1,0)
 		e3:SetTarget(s.splimit)
-   --	 Duel.RegisterEffect(e3,tp)
+		Duel.RegisterEffect(e3,tp)
 		local e4=e3:Clone(e3)
 		e4:SetCode(EFFECT_CANNOT_SUMMON)
-	 --   Duel.RegisterEffect(e4,tp)
+		Duel.RegisterEffect(e4,tp)
 	end
 	e:SetLabel(1)
 end
