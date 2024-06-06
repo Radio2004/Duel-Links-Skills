@@ -51,6 +51,8 @@ end
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--OPT check
 	if Duel.GetFlagEffect(tp,id)>0 and Duel.GetFlagEffect(tp,id+1)>0 then return end
+
+	Debug.Message(Duel.GetTurnCount())
 	--Boolean checks for the activation condition: b1, b2
 	local b1=Duel.GetFlagEffect(tp,id)==0
 		and Duel.IsExistingMatchingCard(Card.IsLink,tp,LOCATION_EXTRA,0,1,nil,5)
