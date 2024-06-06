@@ -27,7 +27,7 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCondition(s.ntcon)
 		e1:SetTarget(aux.FieldSummonProcTg(s.nttg))
 		Duel.RegisterEffect(e1,tp)
-		local e2=e1:Clone(e2)
+		local e2=e1:Clone(e1)
 		e2:SetCode(EFFECT_SET_PROC)
 		c:RegisterEffect(e2,tp)
 		--spsummon limit
