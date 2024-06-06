@@ -90,7 +90,7 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 		for i=1,#keyMonster do
 			local g=Duel.CreateToken(tp,keyMonster[i])
 			  Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
-			  c:SetCardTarget(g)
+			  e:GetHandler():SetCardTarget(g)
 			  Duel.SpecialSummonComplete()
 		end
 	end
