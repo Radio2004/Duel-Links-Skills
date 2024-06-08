@@ -1,5 +1,4 @@
 --Darkfluid Link
---Empty, Infinite, and Infinite Light
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate Skill
@@ -19,7 +18,6 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
 	local c=e:GetHandler()
-	if e:GetLabel()==0 then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -38,7 +36,6 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetCode(EFFECT_CANNOT_SUMMON)
 		Duel.RegisterEffect(e3,tp)
 	end
-	e:SetLabel(1)
 end
 
 function s.decodefilter(c,tp)
