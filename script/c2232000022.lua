@@ -124,6 +124,7 @@ end
 local timelords={33015627,6616912,7733560,28929131,34137269,60222213,65314286,74530899,91712985,92435533}
 
 function s.operation_for_res1(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
 	local tc=Duel.SelectMatchingCard(tp,s.sephylon,tp,LOCATION_HAND,0,1, 1,nil):GetFirst()
 	if tc then
 		for i=1,#timelords do

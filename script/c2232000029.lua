@@ -66,13 +66,21 @@ function s.revealtfilter(c)
 	return c:IsLevelAbove(7) and c:IsRace(RACE_DRAGON) and c:IsMonster() and not c:IsPublic()
 end
 
+function s.filter(c)
+	return c:IsLevelAbove(7) and c:IsRace(RACE_DRAGON) and c:IsMonster() and c:IsAbleToGrave()
+end
+
+function s.thfilter(c)
+	return c:IsMonster() and c:IsAbleToHand() and c:GetAttack()+c:GetDefense()==4000
+end
+
 
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--OPT check
 	if Duel.GetFlagEffect(tp,id)>0 and Duel.GetFlagEffect(tp,id+1)>0 then return end
 
 	--Boolean checks for the activation condition: b1, b2
-	local b1=Duel.GetFlagEffect(tp,id)==0 and  Duel.IsExistingMatchingCard(s.revealtfilter,tp,LOCATION_HAND,0,1,nil)
+	local b1=Duel.GetFlagEffect(tp,id)==0 and  Duel.IsExistingMatchingCard(s.revealtfilter,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK|LOCATION_HAND,0,2,nil) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 		
 
 	local b2=Duel.GetFlagEffect(tp,id+1)==0 and Duel.IsExistingMatchingCard(Card.IsMonster,tp,0,LOCATION_MZONE|LOCATION_GRAVE,1,nil)
@@ -85,7 +93,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
 	--Boolean check for effect 1:
-	local b1=Duel.GetFlagEffect(tp,id)==0
+	local b1=Duel.GetFlagEffect(tp,id)==0 and  Duel.IsExistingMatchingCard(s.revealtfilter,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK|LOCATION_HAND,0,2,nil) and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,nil)
 
 	local b2=Duel.GetFlagEffect(tp,id+1)==0 and Duel.IsExistingMatchingCard(Card.IsMonster,tp,0,LOCATION_MZONE|LOCATION_GRAVE,1,nil)
 
@@ -101,7 +109,12 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
-	
+	local c=e:GetHandler()
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
+	local reveal=Duel.SelectMatchingCard(tp,s.revealtfilter,tp,LOCATION_HAND,0,1,1,nil)
+	if #reveal>0 then
+		Duel.ConfirmCards(1-tp,reveal)
+	end
 	Duel.RegisterFlagEffect(tp,id,0,0,0)
 end
 
