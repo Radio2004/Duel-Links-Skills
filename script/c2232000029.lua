@@ -83,7 +83,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	--Boolean check for effect 1:
 	local b1=Duel.GetFlagEffect(tp,id)==0
 
-	local b2=Duel.GetFlagEffect(tp,id+1)==0
+	local b2=Duel.GetFlagEffect(tp,id+1)==0 and Duel.IsExistingMatchingCard(Card.IsMonster,tp,0,LOCATION_MZONE|LOCATION_GRAVE,1,nil)
 
 	local op=Duel.SelectEffect(tp, {b1,aux.Stringid(id,0)},
 								   {b2,aux.Stringid(id,1)})
