@@ -109,8 +109,9 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.SelectMatchingCard(tp,s.spcfilter,tp,LOCATION_HAND,0,1,1,nil):GetFirst()
+	local tc=Duel.SelectMatchingCard(tp,s.spcfilter,tp,LOCATION_HAND,0,1,1,nil)
 	if tc then
+		Duel.ConfirmCards(1-tp,tc)
 		local keyMonster={24731391,21065189,5043010,63533837,42717221}
 		for i=1,#keyMonster do
 			local tg=Duel.CreateToken(tp,keyMonster[i])
@@ -122,11 +123,11 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 		if #g>0 then
 			Duel.SendtoHand(g,nil,REASON_EFFECT)
 			Duel.ConfirmCards(1-tp,g)
-		end
-		if Duel.GetTurnCount()>1 then
-			local rollback = Duel.CreateToken(tp,57900671)
-			Duel.SendtoHand(rollback,tp,REASON_RULE)
-			Duel.ConfirmCards(1-tp,rollback)
+			if Duel.GetTurnCount()>1 then
+				local rollback = Duel.CreateToken(tp,57900671)
+				Duel.SendtoHand(rollback,tp,REASON_EFFECT)
+				Duel.ConfirmCards(1-tp,rollback)
+			end
 		end
 	end
 	Duel.RegisterFlagEffect(tp,id,0,0,0)
