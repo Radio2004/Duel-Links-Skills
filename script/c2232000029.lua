@@ -115,7 +115,7 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 	if #reveal>0 then
 		Duel.ConfirmCards(1-tp,reveal)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,2,2,nil)
+		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK|LOCATION_HAND,0,2,2,nil)
 		if #g>1 then
 			Duel.SendtoGrave(g,REASON_EFFECT)
 		end
