@@ -118,6 +118,12 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK|LOCATION_HAND,0,2,2,nil)
 		if #g>1 then
 			Duel.SendtoGrave(g,REASON_EFFECT)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+			local tc=Duel.SelectMatchingCard(tp,s.thfilter,tp,LOCATION_DECK,0,1,1,nil)
+			if #tc>0 then
+				Duel.SendtoHand(tc,nil,REASON_EFFECT)
+				Duel.ConfirmCards(1-tp,tc)
+			end
 		end
 	end
 	Duel.RegisterFlagEffect(tp,id,0,0,0)
