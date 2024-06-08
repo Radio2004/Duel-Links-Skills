@@ -35,7 +35,6 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		local e3=e2:Clone(e2)
 		e3:SetCode(EFFECT_CANNOT_SUMMON)
 		Duel.RegisterEffect(e3,tp)
-	end
 end
 
 function s.decodefilter(c,tp)
