@@ -71,7 +71,7 @@ function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	local b1=Duel.GetFlagEffect(tp,id)==0
 		
 
-	local b2=Duel.GetFlagEffect(tp,id+1)==0
+	local b2=Duel.GetFlagEffect(tp,id+1)==0 and Duel.IsExistingMatchingCard(Card.IsMonster,tp,0,LOCATION_MZONE|LOCATION_GRAVE,1,nil)
 
 
 	return aux.CanActivateSkill(tp) and (b1 or b2)
