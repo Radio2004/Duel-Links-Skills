@@ -11,7 +11,7 @@ function s.initial_effect(c)
 	e1:SetLabel(0)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
-	aux.AddSkillProcedure(c,1,false,s.flipcon,s.flipop)
+	aux.AddSkillProcedure(c,1,true,s.flipcon,s.flipop)
 end
 
 function s.op(e,tp,eg,ep,ev,re,r,rp)
