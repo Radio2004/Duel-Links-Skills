@@ -62,13 +62,17 @@ function s.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return not (c:IsAttribute(ATTRIBUTE_DARK) and c:IsRace(RACE_CYBERSE+RACE_DRAGON))
 end
 
+function s.revealtfilter(c)
+	return c:IsLevelAbove(7) and c:IsRace(RACE_DRAGON) and c:IsMonster() and not c:IsPublic()
+end
+
 
 function s.flipcon(e,tp,eg,ep,ev,re,r,rp)
 	--OPT check
 	if Duel.GetFlagEffect(tp,id)>0 and Duel.GetFlagEffect(tp,id+1)>0 then return end
 
 	--Boolean checks for the activation condition: b1, b2
-	local b1=Duel.GetFlagEffect(tp,id)==0
+	local b1=Duel.GetFlagEffect(tp,id)==0 and  Duel.IsExistingMatchingCard(s.revealtfilter,tp,LOCATION_HAND,0,1,nil)
 		
 
 	local b2=Duel.GetFlagEffect(tp,id+1)==0 and Duel.IsExistingMatchingCard(Card.IsMonster,tp,0,LOCATION_MZONE|LOCATION_GRAVE,1,nil)
