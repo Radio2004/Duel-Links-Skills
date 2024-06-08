@@ -11,13 +11,14 @@ function s.initial_effect(c)
 	e1:SetLabel(0)
 	e1:SetOperation(s.op)
 	c:RegisterEffect(e1)
-	aux.AddSkillProcedure(c,1,true,s.flipcon,s.flipop)
+	aux.AddSkillProcedure(c,1,false,s.flipcon,s.flipop)
 end
 
 function s.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
 	local c=e:GetHandler()
+	if e:GetLabel()==0 then
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 		e1:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -35,6 +36,8 @@ function s.op(e,tp,eg,ep,ev,re,r,rp)
 		local e3=e2:Clone(e2)
 		e3:SetCode(EFFECT_CANNOT_SUMMON)
 		Duel.RegisterEffect(e3,tp)
+	end
+	e:SetLabel(1)
 end
 
 function s.decodefilter(c,tp)
