@@ -66,7 +66,7 @@ function s.revealtfilter(c)
 	return c:IsLevelAbove(7) and c:IsRace(RACE_DRAGON) and c:IsMonster() and not c:IsPublic()
 end
 
-function s.filter(c)
+function s.filter(c,tp)
 	return c:IsLevelAbove(7) and c:IsRace(RACE_DRAGON) and c:IsMonster() and c:IsAbleToGrave() and Duel.IsExistingMatchingCard(s.thfilter,tp,LOCATION_DECK,0,1,c)
 
 end
@@ -94,7 +94,7 @@ function s.flipop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SKILL_FLIP,tp,id|(1<<32))
 	Duel.Hint(HINT_CARD,tp,id)
 	--Boolean check for effect 1:
-	local b1=Duel.GetFlagEffect(tp,id)==0 and  Duel.IsExistingMatchingCard(s.revealtfilter,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK|LOCATION_HAND,0,2,nil)
+	local b1=Duel.GetFlagEffect(tp,id)==0 and  Duel.IsExistingMatchingCard(s.revealtfilter,tp,LOCATION_HAND,0,1,nil) and Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK|LOCATION_HAND,0,2,nil,tp)
 
 	local b2=Duel.GetFlagEffect(tp,id+1)==0 and Duel.IsExistingMatchingCard(Card.IsMonster,tp,0,LOCATION_MZONE|LOCATION_GRAVE,1,nil)
 
@@ -116,7 +116,7 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 	if #reveal>0 then
 		Duel.ConfirmCards(1-tp,reveal)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK|LOCATION_HAND,0,2,2,nil)
+		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK|LOCATION_HAND,0,2,2,nil,tp)
 		if #g>1 then
 			Duel.SendtoGrave(g,REASON_EFFECT)
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
