@@ -114,6 +114,11 @@ function s.operation_for_res0(e,tp,eg,ep,ev,re,r,rp)
 	local reveal=Duel.SelectMatchingCard(tp,s.revealtfilter,tp,LOCATION_HAND,0,1,1,nil)
 	if #reveal>0 then
 		Duel.ConfirmCards(1-tp,reveal)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+		local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_DECK,0,2,2,nil)
+		if #g>1 then
+			Duel.SendtoGrave(g,REASON_EFFECT)
+		end
 	end
 	Duel.RegisterFlagEffect(tp,id,0,0,0)
 end
